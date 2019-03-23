@@ -16,13 +16,18 @@ module.exports = function makeExchange(currency) {
     nominals = [],
     change = {};
 
-    for (key in coins) nominals.push(key);
+    for (key in coins) {
+        nominals.push(key);
+    }
     nominals.sort((a, b) => b - a);
 
+
  	for (let i = 0; i <= nominals.length; i++) {
- 		if (currency <= 0) break;
- 		let trunc = Math.trunc(currency / nominals[i]);
- 		if (trunc > 0) {
+ 		if (currency <= 0) {
+            break;
+        }
+ 		const trunc = Math.trunc(currency / nominals[i]);
+ 		if (trunc) {
  			change[coins[nominals[i]]] = trunc;
  			currency -= trunc * nominals[i];
  		};
